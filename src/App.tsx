@@ -47,11 +47,10 @@ export default function App() {
           }}
           style={styles.inputBox}
         />
+
         <Button title="Adicionar" onPress={handleSubmit} />
       </View>
-      {error && (
-        <Text style={styles.error}>Error: Input field is empty...</Text>
-      )}
+      {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
       <Text style={styles.subtitle}>Suas tarefas :</Text>
       {toDoList.length === 0 && <Text>Nenhuma tarefa disponível</Text>}
       {toDoList.map((toDo: IToDo, index: number) => (
