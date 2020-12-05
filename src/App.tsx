@@ -1,7 +1,17 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-sparse-arrays */
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  Button,
+  StatusBar,
+} from 'react-native';
+
+import Layout from './components/Layout';
+import Title from './components/Title';
 
 interface ItemTodoProps {
   text: string;
@@ -35,48 +45,54 @@ export default function App() {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Todo List</Text>
-      <View style={styles.inputWrapper}>
-        <TextInput
-          placeholder="Insira uma nova tarefa..."
-          value={value}
-          onChangeText={(e) => {
-            setValue(e);
-            showError(false);
-          }}
-          style={styles.inputBox}
-        />
-
-        <Button title="Adicionar" onPress={handleSubmit} />
-      </View>
-      {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
-      <Text style={styles.subtitle}>Suas tarefas :</Text>
-      {toDoList.length === 0 && <Text>Nenhuma tarefa disponível</Text>}
-      {toDoList.map((toDo: ItemTodoProps, index: number) => (
-        <View style={styles.listItem} key={`${index}_${toDo.text}`}>
-          <Text
-            style={[
-              styles.task,
-              {textDecorationLine: toDo.completed ? 'line-through' : 'none'},
-              ,
-            ]}>
-            {toDo.text}
-          </Text>
-          <Button
-            title={toDo.completed ? 'Completado' : 'Completar'}
-            onPress={() => toggleComplete(index)}
-          />
-          <Button
-            title="X"
-            onPress={() => {
-              removeItem(index);
+    <>
+      <StatusBar barStyle="light-content" />
+      <Layout>
+        <Title text="Todo List" />
+        <View style={styles.inputWrapper}>
+          <TextInput
+            placeholder="Insira uma nova tarefa..."
+            placeholderTextColor="#737373"
+            value={value}
+            onChangeText={(e) => {
+              setValue(e);
+              showError(false);
             }}
-            color="crimson"
+            style={styles.inputBox}
           />
+
+          <Button title="Adicionar" onPress={handleSubmit} />
         </View>
-      ))}
-    </View>
+        {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
+        {/* <Text style={styles.subtitle}>Suas tarefas :</Text> */}
+        {toDoList.length === 0 && (
+          <Text style={styles.subtitle}>Nenhuma tarefa disponível</Text>
+        )}
+        {toDoList.map((toDo: ItemTodoProps, index: number) => (
+          <View style={styles.listItem} key={`${index}_${toDo.text}`}>
+            <Text
+              style={[
+                styles.task,
+                {textDecorationLine: toDo.completed ? 'line-through' : 'none'},
+                ,
+              ]}>
+              {toDo.text}
+            </Text>
+            <Button
+              title={toDo.completed ? 'Completado' : 'Completar'}
+              onPress={() => toggleComplete(index)}
+            />
+            <Button
+              title="X"
+              onPress={() => {
+                removeItem(index);
+              }}
+              color="crimson"
+            />
+          </View>
+        ))}
+      </Layout>
+    </>
   );
 }
 
@@ -98,16 +114,10 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     paddingLeft: 8,
   },
-  title: {
-    fontSize: 40,
-    marginBottom: 40,
-    fontWeight: 'bold',
-    textDecorationLine: 'underline',
-  },
   subtitle: {
     fontSize: 20,
     marginBottom: 20,
-    color: 'purple',
+    color: '#737373',
   },
   listItem: {
     flexDirection: 'row',
@@ -118,9 +128,13 @@ const styles = StyleSheet.create({
   },
   addButton: {
     alignItems: 'flex-end',
+    backgroundColor: '#737373',
+    color: '#737373',
   },
   task: {
     width: 200,
+    color: '#737373',
+    fontSize: 20,
   },
   error: {
     color: 'red',
