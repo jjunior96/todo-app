@@ -3,14 +3,14 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View, TextInput, Button} from 'react-native';
 
-interface IToDo {
+interface ItemTodoProps {
   text: string;
   completed: boolean;
 }
 
 export default function App() {
   const [value, setValue] = useState<string>('');
-  const [toDoList, setToDos] = useState<IToDo[]>([]);
+  const [toDoList, setToDos] = useState<ItemTodoProps[]>([]);
   const [error, showError] = useState<Boolean>(false);
 
   const handleSubmit = (): void => {
@@ -53,7 +53,7 @@ export default function App() {
       {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
       <Text style={styles.subtitle}>Suas tarefas :</Text>
       {toDoList.length === 0 && <Text>Nenhuma tarefa disponível</Text>}
-      {toDoList.map((toDo: IToDo, index: number) => (
+      {toDoList.map((toDo: ItemTodoProps, index: number) => (
         <View style={styles.listItem} key={`${index}_${toDo.text}`}>
           <Text
             style={[
