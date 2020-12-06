@@ -18,6 +18,12 @@ interface ItemTodoProps {
   completed: boolean;
 }
 
+// #1B1C26
+// #343440
+// #D9D9D9
+// #737373
+// #0D0D0D
+
 export default function App() {
   const [value, setValue] = useState<string>('');
   const [toDoList, setToDos] = useState<ItemTodoProps[]>([]);
