@@ -70,7 +70,6 @@ export default function App() {
           <Button title="Adicionar" onPress={handleSubmit} />
         </View>
         {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
-        {/* <Text style={styles.subtitle}>Suas tarefas :</Text> */}
         {toDoList.length === 0 && (
           <Text style={styles.subtitle}>Nenhuma tarefa disponível</Text>
         )}
