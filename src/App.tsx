@@ -1,17 +1,13 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable no-sparse-arrays */
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Button,
-  StatusBar,
-} from 'react-native';
+import {StyleSheet, Text, View, Button, StatusBar} from 'react-native';
 
 import Layout from './components/Layout';
 import Title from './components/Title';
+import Input from './components/Input';
+import Item from './components/Item';
+import AddButton from './components/Button';
 
 interface ItemTodoProps {
   text: string;
@@ -56,7 +52,7 @@ export default function App() {
       <Layout>
         <Title text="Todo List" />
         <View style={styles.inputWrapper}>
-          <TextInput
+          <Input
             placeholder="Insira uma nova tarefa..."
             placeholderTextColor="#737373"
             value={value}
@@ -64,17 +60,17 @@ export default function App() {
               setValue(e);
               showError(false);
             }}
-            style={styles.inputBox}
           />
 
-          <Button title="Adicionar" onPress={handleSubmit} />
+          <AddButton onPress={handleSubmit}>Adicionar</AddButton>
         </View>
         {error && <Text style={styles.error}>Insira alguma tarefa...</Text>}
         {toDoList.length === 0 && (
           <Text style={styles.subtitle}>Nenhuma tarefa disponível</Text>
         )}
         {toDoList.map((toDo: ItemTodoProps, index: number) => (
-          <View style={styles.listItem} key={`${index}_${toDo.text}`}>
+          // <View style={styles.listItem} key={`${index}_${toDo.text}`}>
+          <Item key={`${index}_${toDo.text}`}>
             <Text
               style={[
                 styles.task,
@@ -84,7 +80,7 @@ export default function App() {
               {toDo.text}
             </Text>
             <Button
-              title={toDo.completed ? 'Completado' : 'Completar'}
+              title={toDo.completed ? 'V' : 'O'}
               onPress={() => toggleComplete(index)}
             />
             <Button
@@ -94,7 +90,7 @@ export default function App() {
               }}
               color="crimson"
             />
-          </View>
+          </Item>
         ))}
       </Layout>
     </>
@@ -108,8 +104,8 @@ const styles = StyleSheet.create({
   },
   inputWrapper: {
     width: '100%',
-    flexDirection: 'row',
     justifyContent: 'space-between',
+    marginTop: 20,
     marginBottom: 20,
   },
   inputBox: {
