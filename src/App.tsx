@@ -69,7 +69,6 @@ export default function App() {
           <Text style={styles.subtitle}>Nenhuma tarefa disponível</Text>
         )}
         {toDoList.map((toDo: ItemTodoProps, index: number) => (
-          // <View style={styles.listItem} key={`${index}_${toDo.text}`}>
           <Item key={`${index}_${toDo.text}`}>
             <Text
               style={[
